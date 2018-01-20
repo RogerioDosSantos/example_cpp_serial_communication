@@ -269,7 +269,7 @@ void Serial::Log(const char* message, bool show_error)
     std::ostringstream full_message;
     std::string time_message = std::asctime(std::localtime(&date_time));
     time_message.pop_back();
-    full_message << time_message << "," << _port_number << "," << message << "," << error << "," << error_message;
+    full_message << time_message << ",COM" << _port_number << "," << message << "," << error << "," << error_message;
 
     CriticalSessionGuard session_guard(&_sync_communication);
     _logs.push_back(full_message.str());
