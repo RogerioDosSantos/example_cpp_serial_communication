@@ -62,7 +62,7 @@ bool Serial::Init(unsigned int port_number /*= 1*/, unsigned int baud_rate /*= 1
     }
 
     std::ostringstream port_config;
-    port_config << "COM" << port_number;
+    port_config << "\\\\.\\COM" << port_number;
     _port_handler = CreateFile(port_config.str().c_str(),  // communication port string (COMX)
         GENERIC_READ | GENERIC_WRITE,                      // read/write types
         0,                                                 // comm devices must be opened with exclusive access
