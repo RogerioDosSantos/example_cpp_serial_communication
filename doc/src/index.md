@@ -3,13 +3,11 @@
 
 # Introduction
 
-TODO: Add Introduction
+This example show how to communicate with a serial port.
+
+The current version is designed to work on Windows using only the Windows APIs. 
 
 ## How to compile
-
-### Linux
-
-- Run */build/compile_linux_default.sh*
 
 ### Windows
 
@@ -27,8 +25,8 @@ TODO: Add Introduction
       │       └── project-configversion.cmake
       ├── include
       │       └── project.h
-      └── Linux-4.4.0-43-Microsoft - It can change depending on the platform
-          └── x86_64 - It can change depending on the platform
+      └── Windows-10.0.15063 - It can change depending on the platform
+          └── AMD64 - It can change depending on the platform
               ├── bin
               │   └── project - Executable or shared libraries
               ├── lib
