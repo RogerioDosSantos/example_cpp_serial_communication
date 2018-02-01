@@ -63,7 +63,7 @@ bool Serial::Init(unsigned int port_number /*= 1*/, unsigned int baud_rate /*= 1
 
     std::ostringstream port_config;
     port_config << "\\\\.\\COM" << port_number;
-    _port_handler = CreateFile(port_config.str().c_str(),  // communication port string (COMX)
+    _port_handler = CreateFileA(port_config.str().c_str(),  // communication port string (COMX)
         GENERIC_READ | GENERIC_WRITE,                      // read/write types
         0,                                                 // comm devices must be opened with exclusive access
         NULL,                                              // no security attributes
@@ -103,7 +103,7 @@ bool Serial::Init(unsigned int port_number /*= 1*/, unsigned int baud_rate /*= 1
     std::ostringstream control_settings;
     control_settings << "baud=" << baud_rate << " parity=" << parity << " data=" << data_bits << " stop=" << stop_bits;
     _control_settings.fRtsControl = RTS_CONTROL_ENABLE;
-    if (!BuildCommDCB(control_settings.str().c_str(), &_control_settings))
+    if (!BuildCommDCBA(control_settings.str().c_str(), &_control_settings))
     {
         Log("Init - Could not get the current device control settings.", true);
         return false;
@@ -259,7 +259,7 @@ void Serial::Log(const char* message, bool show_error)
     {
         error = GetLastError();
         char* error_message_buffer = nullptr;
-        unsigned int buffer_size = FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL,
+        unsigned int buffer_size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL,
             error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (char*)&error_message_buffer, 0, NULL);
         error_message = std::string(error_message_buffer, buffer_size);
         LocalFree(error_message_buffer);
