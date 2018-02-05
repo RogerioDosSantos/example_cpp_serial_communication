@@ -241,6 +241,12 @@ bool Serial::Stop()
 
     SetEvent(_shutdown_event_handler);
     _thread->join();
+    if(_port_handler != nullptr)
+    {
+      CloseHandler(_port_handler);
+      _port_handler = nullptr;
+    }
+
     return true;
 }
 
